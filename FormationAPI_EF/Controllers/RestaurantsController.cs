@@ -25,7 +25,7 @@ namespace FormationAPI_EF.Controllers
             return Ok(restaurants);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}",Name = nameof(GetRestaurant))]
         [ProducesResponseType(typeof(Restaurant), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<Restaurant>> GetRestaurant(int id)
@@ -43,7 +43,7 @@ namespace FormationAPI_EF.Controllers
         public async Task<ActionResult<Restaurant>> AddRestaurant(Restaurant restaurant)
         {
             await _restaurantService.AddRestaurantAsync(restaurant);
-            return CreatedAtRoute(nameof(GetRestaurant), new { id = restaurant.Id },restaurant); // Produit un erreur 500  "No route matches the supplied values"
+            return CreatedAtRoute(nameof(GetRestaurant), new { id = restaurant.Id },restaurant); 
         }
 
         [HttpPut("{id}")]
